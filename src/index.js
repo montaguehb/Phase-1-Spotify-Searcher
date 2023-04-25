@@ -36,6 +36,7 @@ const getPlaylist = (token, playlistID) => {
     .then(playlist => console.log(playlist))
 }
 
+
 const tokenStorage = (tokenObj) => {
     for (let key in tokenObj) {
         key === "expires_in"?localStorage.setItem("expiration", `${Math.floor(Date.now() / 1000) + 3600}`):localStorage.setItem(`${key}`, `${tokenObj[key]}`);
