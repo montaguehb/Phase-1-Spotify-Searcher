@@ -1,4 +1,4 @@
-const playlists = [{genre: pop, id: "37i9dQZF1DXcBWIGoYBM5M"}]
+const playlists = [{genre: "pop", id: "37i9dQZF1DXcBWIGoYBM5M"}, {genre: "Hip-Hop", id: "37i9dQZF1DX8uG7blV3kzV"}, {genre: "Rock", id: "37i9dQZF1DXcF6B6QPhFDv"}, {genre: "House", id: "37i9dQZF1DX5xiztvBdlUf"}, {genre: "Alt", id: "37i9dQZF1DXdfR43X3iEzK"}]
 let timer = 3600;
 
 const getToken = () => {
@@ -24,19 +24,23 @@ const getToken = () => {
     }
 }
 
-
-const getPlaylist = (token, playlistID) => {
-    fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
+//Function that makes a call to the Spotify API and retrieves a playlist based on the ID it recieves
+const getPlaylist = (playlistID, numSongs, offset) => {
+    const urlParams = new URLSearchParams({
+        "offset": `${offset}`,
+        "limit": `${numSongs}`
+    })
+    fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?${urlParams.toString()}`, {
         method: "GET",
         headers: {
-            authorization: `${token.token_type} ${token.access_token}`
-        } 
+            authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
+        }
     })
     .then(resp => resp.json())
     .then(playlist => console.log(playlist))
 }
 
-
+//Puts a copt of the token object it recieves into local storage
 const tokenStorage = (tokenObj) => {
     for (let key in tokenObj) {
         key === "expires_in"?localStorage.setItem("expiration", `${Math.floor(Date.now() / 1000) + 3600}`):localStorage.setItem(`${key}`, `${tokenObj[key]}`);
