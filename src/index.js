@@ -73,3 +73,16 @@ setInterval(getToken(), (timer * 1000))
 //         song.hidden?
 //     })
 // })
+
+
+//filter for regular search by song name
+//hidden attribute
+
+fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?${urlParams.toString()}`, {
+    method: "GET",
+    headers: {
+        authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
+    }
+})
+.then(resp => resp.json())
+.then(playlistObj => appendPlaylistItems(playlistObj))
