@@ -1,5 +1,5 @@
 //global variables
-
+const musicCollection = document.querySelector("#music-collection")
 let emptyObj ={}
 
 function appendPlaylistItems(playlistObj){
@@ -11,7 +11,6 @@ function appendPlaylistItems(playlistObj){
   newIframe.src = `https://open.spotify.com/embed/track/${id}`
   newIframe.setAttribute("allow", "clipboard-write; encrypted-media; fullscreen; picture-in-picture" )
   newIframe.setAttribute("loading", "lazy")
-  let musicCollection = document.querySelector('.music-collection')
   musicCollection.append(newIframe)
   })
 }
