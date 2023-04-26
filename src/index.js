@@ -2,11 +2,12 @@
 const musicCollection = document.querySelector(".music-collection")
 let emptyObj ={}
 function appendPlaylistItems(playlistObj){
-  // debugger
-  playlistObj.items.forEach((item) => {
-
+    playlistObj.items.forEach((item) => {
+        
+        
+        const id = item.hasOwnProperty('track') ? item.track.id : item.id
   const newIframe = document.createElement('iframe')
-  newIframe.src = `https://open.spotify.com/embed/track/${item.track.id}`
+  newIframe.src = `https://open.spotify.com/embed/track/${id}`
   newIframe.setAttribute("allow", "clipboard-write; encrypted-media; fullscreen; picture-in-picture" )
   newIframe.setAttribute("loading", "lazy")
   let musicCollection = document.querySelector('.music-collection')
@@ -109,12 +110,13 @@ function displaySong(song){
 simpleSearch.addEventListener("submit", (e) =>{
     e.preventDefault()
     const song = e.target["song-title-input"].value
-    fetch(`https://api.spotify.com/v1/search?q=${song}&type=track`, {
+    fetch(`https://api.spotify.com/v1/search?q=${song}&type=track&limit=10`, {
         method: "GET",
         headers: {
             authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
         }
     })
     .then(resp => resp.json())
-    .then(songs => songs.tracks.items.forEach(song => displaySong(song)))
+    .then(songs => appendPlaylistItems(songs.tracks))
 })
+// songs.tracks.items.forEach(song => 
