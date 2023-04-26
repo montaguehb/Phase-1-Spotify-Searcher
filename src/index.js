@@ -57,7 +57,7 @@ const getPlaylist = (playlistID, numSongs, offset) => {
     .then(playlistObj => appendPlaylistItems(playlistObj))
 }
 
-//Puts a copt of the token object it recieves into local storage
+//Puts a copy of the token object it recieves into local storage
 const tokenStorage = (tokenObj) => {
     for (let key in tokenObj) {
         key === "expires_in"?localStorage.setItem("expiration", `${Math.floor(Date.now() / 1000) + 3600}`):localStorage.setItem(`${key}`, `${tokenObj[key]}`);
@@ -65,3 +65,11 @@ const tokenStorage = (tokenObj) => {
 }
 
 setInterval(getToken(), (timer * 1000))
+
+//event listeners
+// document.querySelector("a").addEventListener("click", e => {
+//     const songs = document.querySelectorAll(`.${e.target.id}`)
+//     songs.forEach(song => {
+//         song.hidden?
+//     })
+// })
