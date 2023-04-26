@@ -1,5 +1,5 @@
 //global variables
-const musicCollection = document.querySelector(".music-collection")
+
 let emptyObj ={}
 
 function appendPlaylistItems(playlistObj){
