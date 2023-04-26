@@ -1,3 +1,5 @@
+//global variables
+const musicCollection = document.querySelector(".music-collection")
 let emptyObj ={}
 function appendPlaylistItems(playlistObj){
   // debugger
@@ -75,14 +77,44 @@ setInterval(getToken(), (timer * 1000))
 // })
 
 
-//filter for regular search by song name
-//hidden attribute
+//function and event listener to search for a song by track
+//name and display it in music container
+const simpleSearch = document.querySelector("#simple-search")
+function displaySong(song){
+    const div = document.createElement("div")
+    div.className = "card"
+    const h4 = document.createElement("h4")
+    h4.className = "track-title"
+    h4.textContent = song.name
+    const img = document.createElement("img")
+    // debugger
+    img.src = song.album.images[1].url
+    img.className = "track-image"
+    img.alt = `${song.name} by ${song.artists.map(artist => artist.name)}`
+    const span = document.createElement("span")
+    span.className = "artists"
+    span.textContent = `artists: ${song.artists.map(artist => artist.name)}`
+    const br = document.createElement("br")
+    const audio = document.createElement("audio")
+    audio.controls = 'controls'
+    const source = document.createElement("source")
+    source.src = song.preview_url
+    source.type = 'audio/mp3' 
 
-fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?${urlParams.toString()}`, {
-    method: "GET",
-    headers: {
-        authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
-    }
+    audio.append(source)
+
+    div.append(h4, img, audio, br, span)
+    musicCollection.append(div)
+}
+simpleSearch.addEventListener("submit", (e) =>{
+    e.preventDefault()
+    const song = e.target["song-title-input"].value
+    fetch(`https://api.spotify.com/v1/search?q=${song}&type=track`, {
+        method: "GET",
+        headers: {
+            authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
+        }
+    })
+    .then(resp => resp.json())
+    .then(songs => songs.tracks.items.forEach(song => displaySong(song)))
 })
-.then(resp => resp.json())
-.then(playlistObj => appendPlaylistItems(playlistObj))
