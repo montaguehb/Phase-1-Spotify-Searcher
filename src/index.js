@@ -12,14 +12,11 @@ function appendPlaylistItems(playlistObj){
   })
 }
 
-
-
-
 const playlists = [{genre: "pop", id: "37i9dQZF1DXcBWIGoYBM5M"}, {genre: "Hip-Hop", id: "37i9dQZF1DX8uG7blV3kzV"}, {genre: "Rock", id: "37i9dQZF1DXcF6B6QPhFDv"}, {genre: "House", id: "37i9dQZF1DX5xiztvBdlUf"}, {genre: "Alt", id: "37i9dQZF1DXdfR43X3iEzK"}]
 let timer = 3600;
 
 const getToken = () => {
-    if(localStorage.getItem("expiration") > Math.floor(Date.now() / 1000)) {
+    if(localStorage.getItem("expiration") < Math.floor(Date.now() / 1000)) {
         localStorage.clear()
         fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
