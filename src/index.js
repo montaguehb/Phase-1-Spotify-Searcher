@@ -82,10 +82,8 @@ document.querySelectorAll("a").forEach(element => {
 })
 
 
-//function and event listener to search for a song by track
-//name and display it in music container
+//simple search ↓↓↓↓↓↓
 const simpleSearch = document.querySelector("#simple-search")
-
 simpleSearch.addEventListener("submit", (e) =>{
     e.preventDefault()
     const song = e.target["song-title-input"].value
@@ -97,4 +95,17 @@ simpleSearch.addEventListener("submit", (e) =>{
     })
     .then(resp => resp.json())
     .then(songs => appendPlaylistItems(songs.tracks))
+})
+//advanced search ↓↓↓↓↓↓↓
+const advancedSearch = document.querySelector("#advanced-search")
+const advSearchButton = document.querySelector("#advanced-search-button")
+advSearchButton.addEventListener("click", () =>{
+    if(advancedSearch.hidden === true){
+        advancedSearch.hidden = false
+        simpleSearch.hidden = true
+    }
+    else{
+        advancedSearch.hidden = true
+        simpleSearch.hidden = false
+    }
 })
