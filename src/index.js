@@ -1,8 +1,25 @@
+let emptyObj ={}
+function appendPlaylistItems(playlistObj){
+  // debugger
+  playlistObj.items.forEach((item) => {
+
+  const newIframe = document.createElement('iframe')
+  newIframe.src = `https://open.spotify.com/embed/track/${item.track.id}`
+  newIframe.setAttribute("allow", "clipboard-write; encrypted-media; fullscreen; picture-in-picture" )
+  newIframe.setAttribute("loading", "lazy")
+  let musicCollection = document.querySelector('.music-collection')
+  musicCollection.append(newIframe)
+  })
+}
+
+
+
+
 const playlists = [{genre: "pop", id: "37i9dQZF1DXcBWIGoYBM5M"}, {genre: "Hip-Hop", id: "37i9dQZF1DX8uG7blV3kzV"}, {genre: "Rock", id: "37i9dQZF1DXcF6B6QPhFDv"}, {genre: "House", id: "37i9dQZF1DX5xiztvBdlUf"}, {genre: "Alt", id: "37i9dQZF1DXdfR43X3iEzK"}]
 let timer = 3600;
 
 const getToken = () => {
-    if(localStorage.getItem("expiration") <  Math.floor(Date.now() / 1000)) {
+    if(localStorage.getItem("expiration") > Math.floor(Date.now() / 1000)) {
         localStorage.clear()
         fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
@@ -37,7 +54,7 @@ const getPlaylist = (playlistID, numSongs, offset) => {
         }
     })
     .then(resp => resp.json())
-    .then(playlist => console.log(playlist))
+    .then(playlistObj => appendPlaylistItems(playlistObj))
 }
 
 //Puts a copt of the token object it recieves into local storage
