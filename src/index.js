@@ -1,13 +1,18 @@
+//global variables
+const musicCollection = document.querySelector(".music-collection")
 let emptyObj ={}
-const musicCollection = document.querySelector("#music-collection")
 
 function appendPlaylistItems(playlistObj){
-  playlistObj.items.forEach((item) => {
-    const newIframe = document.createElement('iframe')
-    newIframe.src = `https://open.spotify.com/embed/track/${item.track.id}`
-    newIframe.setAttribute("allow", "clipboard-write; encrypted-media; fullscreen; picture-in-picture" )
-    newIframe.setAttribute("loading", "lazy")
-    musicCollection.append(newIframe)
+    playlistObj.items.forEach((item) => {
+        
+        
+        const id = item.hasOwnProperty('track') ? item.track.id : item.id
+  const newIframe = document.createElement('iframe')
+  newIframe.src = `https://open.spotify.com/embed/track/${id}`
+  newIframe.setAttribute("allow", "clipboard-write; encrypted-media; fullscreen; picture-in-picture" )
+  newIframe.setAttribute("loading", "lazy")
+  let musicCollection = document.querySelector('.music-collection')
+  musicCollection.append(newIframe)
   })
 }
 
@@ -75,4 +80,22 @@ document.querySelectorAll("a").forEach(element => {
             element.genre === genre?getPlaylist(element.id, 10, 0):() => {};
         });
     })
+})
+
+
+//function and event listener to search for a song by track
+//name and display it in music container
+const simpleSearch = document.querySelector("#simple-search")
+
+simpleSearch.addEventListener("submit", (e) =>{
+    e.preventDefault()
+    const song = e.target["song-title-input"].value
+    fetch(`https://api.spotify.com/v1/search?q=${song}&type=track&limit=10`, {
+        method: "GET",
+        headers: {
+            authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
+        }
+    })
+    .then(resp => resp.json())
+    .then(songs => appendPlaylistItems(songs.tracks))
 })
