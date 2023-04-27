@@ -1,5 +1,5 @@
 //global variables
-const musicCollection = document.querySelector(".music-collection")
+const musicCollection = document.querySelector("#music-collection")
 let emptyObj ={}
 
 function appendPlaylistItems(playlistObj){
@@ -11,7 +11,6 @@ function appendPlaylistItems(playlistObj){
   newIframe.src = `https://open.spotify.com/embed/track/${id}`
   newIframe.setAttribute("allow", "clipboard-write; encrypted-media; fullscreen; picture-in-picture" )
   newIframe.setAttribute("loading", "lazy")
-  let musicCollection = document.querySelector('.music-collection')
   musicCollection.append(newIframe)
   })
 }
@@ -83,14 +82,53 @@ document.querySelectorAll("a").forEach(element => {
 })
 
 
-//function and event listener to search for a song by track
-//name and display it in music container
+//simple search ↓↓↓↓↓↓
 const simpleSearch = document.querySelector("#simple-search")
-
 simpleSearch.addEventListener("submit", (e) =>{
     e.preventDefault()
     const song = e.target["song-title-input"].value
+    e.target.reset()
     fetch(`https://api.spotify.com/v1/search?q=${song}&type=track&limit=10`, {
+        method: "GET",
+        headers: {
+            authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
+        }
+    })
+    .then(resp => resp.json())
+    .then(songs => appendPlaylistItems(songs.tracks))
+})
+//advanced search ↓↓↓↓↓↓↓
+const advancedSearch = document.querySelector("#advanced-search")
+const advSearchButton = document.querySelector("#advanced-search-button")
+advSearchButton.addEventListener("click", () =>{
+    if(advancedSearch.hidden === true){
+        advancedSearch.hidden = false
+        simpleSearch.hidden = true
+        advSearchButton.textContent = "Search by Song"
+    }
+    else{
+        advancedSearch.hidden = true
+        simpleSearch.hidden = false
+        advSearchButton.textContent = "Advanced Search"
+    }
+})
+advancedSearch.addEventListener("submit", (e) =>{
+    e.preventDefault()
+    musicCollection.innerHTML = ""
+    e.target.reset()
+    const infoObj = {
+        song: e.target["track-name"].value,
+        artist: e.target["artist-name"].value,
+        album: e.target["album-name"].value,
+        playlist: e.target["playlist"].value,
+    }
+    for(let key in infoObj){
+        if(!!infoObj[key]){
+            infoObj[key].padStart(1,"&")
+        }
+    }
+
+    fetch(`https://api.spotify.com/v1/search?q=${infoObj.song}${infoObj.artist}${infoObj.album}${infoObj.playlist}&type=track&type=artist&type=album&type=playlist&type=show&type=episode&type=audiobook&limit=10`, {
         method: "GET",
         headers: {
             authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`,
