@@ -150,3 +150,21 @@ document.querySelectorAll("form").forEach((form) => {
 
 setInterval(getToken(), timer * 1000)
 // getPlaylist(playlists[0].id, 10, 0)
+
+
+
+
+
+
+//adding mouseover
+
+
+function changeColor(){
+title.style.color = `rgb(${Math.floor(Math.random()*255) } ,${Math.floor(Math.random()*255) },${Math.floor(Math.random()*255)})`
+
+}
+
+
+title.addEventListener('mouseover', ()=>{
+    changeColor()})
+
