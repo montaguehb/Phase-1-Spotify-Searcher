@@ -19,27 +19,28 @@
               
               <h3 >
                   <nav class="nav-bar">
-                      <a href="#" id="pop">Pop</a>
-                      <a href="#" id="hipHop">Hip-Hop</a>
-                      <a href="#" id="rock">Rock</a>
-                      <a href="#" id="house">House</a>
-                      <a href="#" id="alt">Alt</a>
+                      <a href="#" id="Pop">Pop</a>
+                      <a href="#" id="Hip-Hop">Hip-Hop</a>
+                      <a href="#" id="Rock">Rock</a>
+                      <a href="#" id="House">House</a>
+                      <a href="#" id="Alt">Alt</a>
                     </nav>
                 </h3>
                 <div class="button"><button>
                     home
                 </button></div>
       <div class="search-container">
-        <input>
+        <form id="simple-search" action="https://api.spotify.com/v1/search">
+          <input type="text" name="song-title-input" placeholder="Song Name">
+          <input type="submit" value="Search">
+        </form>
+        <form id="advanced-search" action="https://api.spotify.com/v1/search" hidden="true">
+          <input type="text" name="track-name" placeholder="track name">
+        </form>
     </div>
-</div>   
-<div class="playlist">
-    playlist
-</div>
-          
-        <div class="music-collection">
-          <h2>
-        </h2>
+    <button>advanced search</button>
+</div>      
+        <div id="music-collection">
         </div>
     </div>
 </div>
