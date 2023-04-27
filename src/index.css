@@ -51,7 +51,7 @@ h1 {
 body {  
   background-color: #5D5D87;
   margin-top: 50px;
-  max-width: 1000px;
+  width: 1000px;
   align-self: center;
 }
 
