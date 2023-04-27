@@ -4,31 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
     <link rel="stylesheet" href="./src/index.css" />
-  <script defer src= "src/secret.js"> </script> 
-  <script defer src="src/index.js"></script>
+    <script defer src= "src/secret.js"> </script> 
+    <script defer src="src/index.js"></script>
   </head>
-  
   <body>
-    <h1 class="title">
-        SPOTIFY SEARCHER
-    </h1>
-      <div class="main-container">
-          <div class="nav-container">
-              
-              <h3 >
-                  <nav class="nav-bar">
-                      <a href="#" id="Pop">Pop</a>
-                      <a href="#" id="Hip-Hop">Hip-Hop</a>
-                      <a href="#" id="Rock">Rock</a>
-                      <a href="#" id="House">House</a>
-                      <a href="#" id="Alt">Alt</a>
-                    </nav>
-                </h3>
-                <div class="button"><button>
-                    home
-                </button></div>
+    <h1 class="title">SPOTIFY SEARCHER</h1>
+      <nav class="nav-bar">
+        <a href="#" id="Pop">Pop</a>
+        <a href="#" id="Hip-Hop">Hip-Hop</a>
+        <a href="#" id="Rock">Rock</a>
+        <a href="#" id="House">House</a>
+        <a href="#" id="Alt">Alt</a>
+      </nav>
+    <div id="main-container">    
       <div class="search-container">
         <form id="simple-search" action="https://api.spotify.com/v1/search">
           <input type="text" name="track-name" placeholder="Song">
@@ -42,17 +31,8 @@
           <input type="submit" value="Search">
         </form>
     </div>
-    <button id="advanced-search-button">Advanced Search</button>
-</div>      
-        <div id="music-collection">
-        </div>
-    </div>
-</div>
-   </div>
-    
-    <div>
- 
-      </div>
+    <button id="advanced-search-button">Advanced Search</button>    </div>  
+    <div id="music-collection">
     </div>
   </body>
 </html>

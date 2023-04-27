@@ -1,36 +1,97 @@
 
-
-.main-container {
+* {
   display: flex;
   flex-direction: column;
   align-items: center; /* align children horizontally */
-  justify-content: flex-start; /* align children vertically */
-  max-width: 1000px;
-  max-height: 1000px;
-  margin: 0 auto;
-
+  align-content: flex-start; /* align children vertically */
   text-align: center;
-  background-color: rgb(111, 155, 112);
+  color: white;
 }
 
-.nav-container {
-  background-color: rgb(220, 245, 225);
+[hidden]{
+  display:none;
+}
+
+h1 {
   width: 100%;
 }
 
-.music-collection {
-  margin: 0 auto;
-  flex-direction: row;
-  text-align: center;
-  background-color: rgb(82, 82, 243);
+.nav-container {
+  background-color: #8080C0;
 }
 
-body {
-    
-  background-color: rgb(73, 73, 73);
-  margin-top: 100px;
+#Pop {
+  background-color: #8080C0;
+}
+
+#Hip-Hop {
+  background-color: #A090BF;
+}
+
+#Rock {
+  background-color: #C0A1BE;
+}
+
+#House {
+  background-color: #DFB1BC;
+}
+
+#Alt {
+  background-color: #FFC1BB;
+}
+
+#music-collection {
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: pink;
+}
+
+body {  
+  background-color: #5D5D87;
+  margin-top: 50px;
+  max-width: 1000px;
+  align-self: center;
+}
+
+.nav-bar {
+  flex-direction: row;
+  width: 100%;
 }
 
 .nav-bar * {
   justify-content: space-evenly;
+  width: 20%;
+  border-color: black;
+  border: 20px;
+}
+
+button {
+  color: black;
+}
+
+input[type="submit"] {
+  color: black;
+}
+
+iframe {
+  width: 25%;
+  border: 0px;
+}
+
+.search-container *{
+  flex-direction: row;
+  width: auto;
+  color: black;
+}
+
+input {
+  color: black;
+}
+
+#main-container {
+  width: 100%;
+  background-color: pink;
+  padding:20px 0;
 }
