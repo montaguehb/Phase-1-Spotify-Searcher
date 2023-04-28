@@ -95,3 +95,7 @@ input {
   background-color: pink;
   padding:20px 0;
 }
+
+script {
+  display: none;
+}
